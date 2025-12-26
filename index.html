@@ -4681,41 +4681,7 @@ document.addEventListener('DOMContentLoaded', initApp);
         window.soundEnabled = true;
         window.notificationsEnabled = true;
         window.deferredPrompt = null;
-        // دالة لتحديث بيانات المستخدم في الملف الشخصي
-function updateProfileData() {
-    if (typeof updateUserProfileData === 'function') {
-        updateUserProfileData({
-            name: userName,
-            email: userEmail,
-            playTime: playTime
-        });
-    }
-}
-
-// تحديث البيانات عند فتح شاشة الملف الشخصي
-document.addEventListener('DOMContentLoaded', function() {
-    // إضافة مستمع للتنقل
-    document.querySelectorAll('.nav-item[data-target="profile-screen"]').forEach(item => {
-        item.addEventListener('click', function() {
-            setTimeout(() => {
-                updateProfileData();
-                if (typeof updateProfileStats === 'function') {
-                    updateProfileStats();
-                }
-            }, 500);
-        });
-    });
-    
-    // تحديث البيانات عند تغييرها
-    const saveProfileBtn = document.getElementById('save-profile');
-    if (saveProfileBtn) {
-        saveProfileBtn.addEventListener('click', function() {
-            setTimeout(() => {
-                updateProfileData();
-            }, 100);
-        });
-    }
-});
+        
     </script>
 </body>
 </html>
