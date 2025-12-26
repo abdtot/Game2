@@ -2637,15 +2637,21 @@ mark {
 // script.js - النسخة المحسنة الكاملة (الملف الرئيسي بعد الفصل)
 
 // تعريف المتغيرات العامة
+// تعريف المتغيرات العامة
 let db;
 let currentStage = 1;
 let currentLevel = 1;
 let levelPoints = 0;
 let totalPoints = 0;
 let selectedCard = null;
-let userName = "المستخدم";
-let userEmail = "";
-let playTime = 0;
+
+// تأكد من تعريف هذه المتغيرات في النطاق العام
+window.userName = "المستخدم";
+window.userEmail = "";
+window.playTime = 0;
+window.currentStage = 1;
+window.levelsData = levelsData; // مهم للإحصائيات
+
 let playTimer;
 let gameMode = "normal";
 let gameTimer;
@@ -4675,6 +4681,41 @@ document.addEventListener('DOMContentLoaded', initApp);
         window.soundEnabled = true;
         window.notificationsEnabled = true;
         window.deferredPrompt = null;
+        // دالة لتحديث بيانات المستخدم في الملف الشخصي
+function updateProfileData() {
+    if (typeof updateUserProfileData === 'function') {
+        updateUserProfileData({
+            name: userName,
+            email: userEmail,
+            playTime: playTime
+        });
+    }
+}
+
+// تحديث البيانات عند فتح شاشة الملف الشخصي
+document.addEventListener('DOMContentLoaded', function() {
+    // إضافة مستمع للتنقل
+    document.querySelectorAll('.nav-item[data-target="profile-screen"]').forEach(item => {
+        item.addEventListener('click', function() {
+            setTimeout(() => {
+                updateProfileData();
+                if (typeof updateProfileStats === 'function') {
+                    updateProfileStats();
+                }
+            }, 500);
+        });
+    });
+    
+    // تحديث البيانات عند تغييرها
+    const saveProfileBtn = document.getElementById('save-profile');
+    if (saveProfileBtn) {
+        saveProfileBtn.addEventListener('click', function() {
+            setTimeout(() => {
+                updateProfileData();
+            }, 100);
+        });
+    }
+});
     </script>
 </body>
 </html>
