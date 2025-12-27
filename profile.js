@@ -996,7 +996,7 @@ function initProfileStyles() {
             backdrop-filter: blur(10px);
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            transition: opacity 4s ease, visibility 4s ease;
             pointer-events: none;
         }
         
@@ -1012,7 +1012,7 @@ function initProfileStyles() {
             padding: 25px;
             border-radius: 25px;
             transform: translateY(30px);
-            transition: transform 0.4s ease, opacity 0.4s ease;
+            transition: transform 4s ease, opacity 4s ease;
             opacity: 0;
             pointer-events: auto;
         }
